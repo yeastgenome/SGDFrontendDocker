@@ -1,0 +1,101 @@
+
+<dl class="key-value">
+                {% for alias in locus.aliases if alias.category == 'Alias' %}
+                    {% if loop.first %}<dt>Aliases</dt><dd>{% endif %}
+
+                    {{ alias.display_name }}
+                    {% set references = alias.references %}
+                    {% set full_url = True %}
+                    {%- include "biblio_references.jinja2" -%}
+
+                    {% if not loop.last %},{% else %}</dd>{% endif %}
+                {% endfor %}
+
+                {% for alias in locus.aliases if alias.category == 'NCBI protein name' %}
+                    {% if loop.first %}
+                        <dt>Protein Product</dt>
+                        <dd>
+                            {{ alias.display_name }}
+                            {% set references = alias.references %}
+                            {% set full_url = True %}
+                            {%- include "biblio_references.jinja2" -%}
+                        </dd>
+                    {% endif %}
+                {% endfor %}
+
+                <dt>Feature Type</dt>
+                <dd>{{ locus.locus_type }}
+                    {% if 'feature_type' in locus.qualities %}
+                        {% set references = locus.qualities.feature_type.references %}
+                        {% set full_url = True %}
+                        {% include "biblio_references.jinja2" %}
+                    {% endif %}
+
+                    {% if locus.qualifier != None %}, {{ locus.qualifier }}{% endif %}
+                    {% if 'qualifier' in locus.qualities %}
+                        {% set references = locus.qualities.qualifier.references %}
+                        {% set full_url = True %}
+                        {% include "biblio_references.jinja2" %}
+                    {% endif %}
+                </dd>
+
+                {% if locus.paralogs|length > 0 %}
+                    <dt>Paralog</dt>
+                    <dd>
+                    {% for paralog in locus.paralogs %}
+                        {% if paralog.child %}
+                            <a href="{{ paralog.child.link }}">{{ paralog.child.display_name }}</a>
+                        {% endif %}
+                        {% set references = paralog.references %}
+                        {% set full_url = True %}
+                        {% include "biblio_references.jinja2" %}
+                        {%- if not loop.last %}, {% endif %}
+                    {% endfor %}
+                    </dd>
+                {% endif %}
+
+ 		{% if locus.URS_ID %}
+		    <dt>RNAcentral ID</dt>
+                    <dd>
+                        <a href='https://rnacentral.org/rna/{{ locus.URS_ID }}/559292' target='2Dwin'>{{ locus.URS_ID }}</a>
+                    </dd>
+		    
+ 		    <dt>Secondary Structure</dt>
+ 		    <dd>
+			<img src="https://rnacentral.org/api/v1/rna/{{ locus.URS_ID }}/2d/svg/" width="200" id='strucImg' onClick="zoom()">
+                    </dd>
+ 		    
+ 		{% endif %}
+
+                {% if 'ecnumbers' in locus and locus.ecnumbers != None  %}
+                    {% if locus.ecnumbers|length > 0 %}
+                        <dt>EC Number</dt>
+                        <dd>
+                        {% for ecnumber in locus.ecnumbers %}
+                            <a href="{{ ecnumber.link }}">{{ ecnumber.display_name }}</a>
+                            {%- if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+
+                {% if 'ecnumber' in locus and locus.ecnumber != None %}
+                    <dt>EC Number</dt>
+                    <dd><a href="{{ locus.ecnumber.link }}">{{ locus.ecnumber.display_name }}</a></dd>
+                {% endif %}
+
+		{% if is_protein %}
+		   {% if locus.protein_summary %}
+		      <dt>Summary</dt>
+		      <dd> 
+			 {{ locus.protein_summary|safe }}
+		      </dd>
+	           {% endif %}
+	        {% else %}
+		   {% if locus.sequence_summary %}
+                      <dt>Summary</dt>
+                      <dd>
+		         {{ locus.sequence_summary|safe }}
+		      </dd>
+                   {% endif %}
+                {% endif %}
+</dl>
