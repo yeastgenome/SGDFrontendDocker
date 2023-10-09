@@ -3,18 +3,6 @@ GEM
   specs:
     chunky_png
     colorize
-    compass
-      chunky_png
-      compass-core
-      compass-import-once
-      rb-fsevent
-      rb-inotify
-      sass
-    compass-core
-      multi_json
-      sass
-    compass-import-once
-      sass
     ffi
     i18n
     multi_json
@@ -35,5 +23,3 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  compass
-  highline
