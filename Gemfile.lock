@@ -1,12 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    capistrano
-      i18n
-      rake
-      sshkit
-    capistrano-ext
-      capistrano
     chunky_png
     colorize
     compass
@@ -42,7 +36,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capistrano
-  capistrano-ext
   compass
   highline
