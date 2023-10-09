@@ -16,7 +16,6 @@ GEM
     compass-import-once
       sass
     ffi
-    highline
     i18n
     multi_json
     net-scp
