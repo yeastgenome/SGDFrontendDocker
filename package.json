@@ -1,11 +1,11 @@
 {
-  "name": "SGDFrontend",
-  "version": "20.6.0",
+  "name": "SGDFrontendDocker",
+  "version": "0.1.0",
   "homepage": "http://www.yeastgenome.org",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yeastgenome/SGDFrontend.git"
+    "url": "https://github.com/yeastgenome/SGDFrontendDocker.git"
   },
   "browserify": {
     "transform": [
