@@ -38,7 +38,7 @@ grunt:
 
 dependencies:
 	npm ci
-	bundle install
+	# bundle install
 	npm run format
 	# npm run lint
 
