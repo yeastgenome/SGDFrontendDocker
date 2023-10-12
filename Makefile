@@ -37,8 +37,7 @@ grunt:
 	grunt
 
 dependencies:
-	npm install
-	npm install -g grunt-cli
+	npm ci
 	bundle install
 	npm run format
 	# npm run lint
